@@ -1,0 +1,41 @@
+============================================================
+  FIREWALL ACL CONFLICT DETECTION REPORT
+  Generated On : 2026-05-05 17:28:33
+  Total Rules  : 6
+  Total Issues : 5
+============================================================
+
+--- ALL RULES WITH RISK SCORES ---
+
+  Rule 1: PERMIT ip 192.168.1.0 0.0.0.255 any | Risk: 🔴 CRITICAL (87/100)
+  Rule 2: DENY ip 192.168.1.50 0.0.0.0 any | Risk: 🟢 LOW (14/100)
+  Rule 3: PERMIT ip 192.168.1.0 0.0.0.255 any | Risk: 🔴 CRITICAL (81/100)
+  Rule 4: DENY ip 192.168.1.50 0.0.0.0 any | Risk: 🟢 LOW (8/100)
+  Rule 5: PERMIT ip 10.0.0.0 0.0.0.255 any | Risk: 🔴 CRITICAL (75/100)
+  Rule 6: DENY ip any any any | Risk: 🟡 MEDIUM (42/100)
+
+--- DETECTED ISSUES ---
+
+  [REDUNDANT] Rule 3 is an exact duplicate of Rule 1
+    -> Rule 1: PERMIT ip 192.168.1.0 0.0.0.255 any
+    -> Rule 3: PERMIT ip 192.168.1.0 0.0.0.255 any
+
+  [REDUNDANT] Rule 4 is an exact duplicate of Rule 2
+    -> Rule 2: DENY ip 192.168.1.50 0.0.0.0 any
+    -> Rule 4: DENY ip 192.168.1.50 0.0.0.0 any
+
+  [SHADOWED] Rule 2 is shadowed by Rule 1 — it will never be reached
+    -> Rule 1: PERMIT ip 192.168.1.0 0.0.0.255 any
+    -> Rule 2: DENY ip 192.168.1.50 0.0.0.0 any
+
+  [SHADOWED] Rule 4 is shadowed by Rule 1 — it will never be reached
+    -> Rule 1: PERMIT ip 192.168.1.0 0.0.0.255 any
+    -> Rule 4: DENY ip 192.168.1.50 0.0.0.0 any
+
+  [SHADOWED] Rule 4 is shadowed by Rule 3 — it will never be reached
+    -> Rule 3: PERMIT ip 192.168.1.0 0.0.0.255 any
+    -> Rule 4: DENY ip 192.168.1.50 0.0.0.0 any
+
+============================================================
+  END OF REPORT
+============================================================
